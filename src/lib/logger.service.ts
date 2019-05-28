@@ -187,7 +187,11 @@ export class NGXLogger {
 
       if (logObject.additional) {
         // stringify as flexibly as possible
-        logObject.additional = [JSON.stringify(logObject.additional, Object.getOwnPropertyNames(logObject.additional))];
+        const converted = [];
+        for (const entry of logObject.additional) {
+          converted.push(JSON.stringify(entry, Object.getOwnPropertyNames(entry)));
+        }
+        logObject.additional = converted;
       }
 
       const headers = this._customHttpHeaders || new HttpHeaders();
