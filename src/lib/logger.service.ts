@@ -185,6 +185,11 @@ export class NGXLogger {
       message = message instanceof Error ? message.stack : message;
       logObject.message = message;
 
+      if (logObject.additional) {
+        // stringify as flexibly as possible
+        logObject.additional = [JSON.stringify(logObject.additional, Object.getOwnPropertyNames(logObject.additional))];
+      }
+
       const headers = this._customHttpHeaders || new HttpHeaders();
       headers.set('Content-Type', 'application/json');
 

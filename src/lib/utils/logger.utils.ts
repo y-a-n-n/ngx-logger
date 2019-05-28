@@ -76,7 +76,7 @@ export class NGXLoggerUtils {
       try {
         // We just want to make sure the JSON can be parsed, we do not want to actually change the type
         if (typeof next === 'object') {
-          JSON.stringify(next);
+          JSON.stringify(next, Object.getOwnPropertyNames(next));
         }
 
         return next;
